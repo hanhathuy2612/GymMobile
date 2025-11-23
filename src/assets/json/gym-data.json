@@ -1,0 +1,213 @@
+[
+    {
+        "day": 1,
+        "dayName": "Back + Biceps",
+        "exercises": [
+            {
+                "id": 1,
+                "name": "Barbell Deadlifts",
+                "gif": "Barbell Deadlifts.gif"
+            },
+            {
+                "id": 2,
+                "name": "One-arm Dumbbell Rows",
+                "gif": "Dumbbell One-Arm Row 2.gif"
+            },
+            {
+                "id": 3,
+                "name": "Barbell Bent Over Rows",
+                "gif": "Barbell Bent Over Rows.gif"
+            },
+            {
+                "id": 4,
+                "name": "Dumbbell Bicep Curls",
+                "gif": "Dumbbell Bicep Curls.gif"
+            },
+            {
+                "id": 5,
+                "name": "Hammer Curls",
+                "gif": "Hammer Curls.gif"
+            },
+            {
+                "id": 6,
+                "name": "Barbell Drag Curls",
+                "gif": "Barbell Drag Curls.gif"
+            },
+            {
+                "id": 7,
+                "name": "Plank Hold (Finisher)",
+                "gif": "Plank Hold.gif"
+            }
+        ]
+    },
+    {
+        "day": 2,
+        "dayName": "Chest + Core",
+        "exercises": [
+            {
+                "id": 1,
+                "name": "Barbell Bench Press (floor press)",
+                "gif": "Barbell Bench Press.gif"
+            },
+            {
+                "id": 2,
+                "name": "Dumbbell Chest Fly (on floor)",
+                "gif": "Dumbbell Chest Fly.gif"
+            },
+            {
+                "id": 3,
+                "name": "Barbell Close-Grip Press",
+                "gif": "Barbell Close-Grip Press.gif"
+            },
+            {
+                "id": 4,
+                "name": "Dumbbell Pullover",
+                "gif": "Dumbbell Pullover.gif"
+            },
+            {
+                "id": 5,
+                "name": "Weighted Crunches",
+                "gif": "Weighted Crunches.gif"
+            },
+            {
+                "id": 6,
+                "name": "Russian Twists (with dumbbell)",
+                "gif": "Russian Twists.gif"
+            },
+            {
+                "id": 7,
+                "name": "Leg Raises",
+                "gif": "Leg Raises.gif"
+            }
+        ]
+    },
+    {
+        "day": 3,
+        "dayName": "Legs (Quads, Hamstrings, Glutes)",
+        "exercises": [
+            {
+                "id": 1,
+                "name": "Barbell Back Squats",
+                "gif": "Barbell Back Squats.gif"
+            },
+            {
+                "id": 2,
+                "name": "Dumbbell Goblet Squats",
+                "gif": "Dumbbell Goblet Squats.gif"
+            },
+            {
+                "id": 3,
+                "name": "Barbell Romanian Deadlifts",
+                "gif": "Barbell Romanian Deadlifts.gif"
+            },
+            {
+                "id": 4,
+                "name": "Dumbbell Lunges",
+                "gif": "Dumbbell Lunges.gif"
+            },
+            {
+                "id": 5,
+                "name": "Dumbbell Calf Raises",
+                "gif": "Dumbbell Calf Raises.gif"
+            },
+            {
+                "id": 6,
+                "name": "Wall Sit (Finisher)",
+                "gif": "Wall Sit.gif"
+            }
+        ]
+    },
+    {
+        "day": 4,
+        "dayName": "Shoulders + Triceps",
+        "exercises": [
+            {
+                "id": 1,
+                "name": "Barbell Bench Press (floor press)",
+                "gif": "Barbell Bench Press.gif"
+            },
+            {
+                "id": 2,
+                "name": "Dumbbell Lateral Raises",
+                "gif": "Dumbbell Lateral Raises.gif"
+            },
+            {
+                "id": 3,
+                "name": "Dumbbell Front Raises",
+                "gif": "Dumbbell Front Raises.gif"
+            },
+            {
+                "id": 4,
+                "name": "Dumbbell Rear Delt Fly",
+                "gif": "Dumbbell Rear Delt Fly.gif"
+            },
+            {
+                "id": 5,
+                "name": "Dumbbell Calf Raises",
+                "gif": "Dumbbell Calf Raises.gif"
+            }
+        ]
+    },
+    {
+        "day": 5,
+        "dayName": "Back + Core (Variation)",
+        "exercises": [
+            {
+                "id": 1,
+                "name": "Barbell Bench Press (floor press)",
+                "gif": "Barbell Bench Press.gif"
+            },
+            {
+                "id": 2,
+                "name": "Dumbbell Shrugs",
+                "gif": "Dumbbell Shrugs.gif"
+            },
+            {
+                "id": 3,
+                "name": "Inverted Rows (under table)",
+                "gif": "Inverted Rows.gif"
+            },
+            {
+                "id": 4,
+                "name": "Dumbbell Concentration Curls",
+                "gif": "Dumbbell Concentration Curls.gif"
+            },
+            {
+                "id": 5,
+                "name": "Hanging Leg Raises (use bar or door)",
+                "gif": "Hanging Leg Raises.gif"
+            },
+            {
+                "id": 6,
+                "name": "Plank with Dumbbell Drag",
+                "gif": "Plank with Dumbbell Drag.gif"
+            }
+        ]
+    },
+    {
+        "day": 6,
+        "dayName": "Full Body Strength + HIIT",
+        "exercises": [
+            {
+                "id": 1,
+                "name": "Barbell Clean and Press",
+                "gif": "Barbell Clean and Press.gif"
+            },
+            {
+                "id": 2,
+                "name": "Dumbbell Thrusters (Squat + Press)",
+                "gif": "Dumbbell Thrusters.gif"
+            },
+            {
+                "id": 3,
+                "name": "Barbell Deadlift High Pull",
+                "gif": "Barbell Deadlift High Pull.gif"
+            },
+            {
+                "id": 4,
+                "name": "Dumbbell Renegade Rows",
+                "gif": "Dumbbell Renegade Rows.gif"
+            }
+        ]
+    }
+]
