@@ -2,6 +2,7 @@ import { Tabs } from "expo-router";
 import React from "react";
 
 import { HapticTab } from "@/components/haptic-tab";
+import { FontAwesomeIcon } from "@/components/ui/FontAwesomeIcon";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Colors } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
@@ -26,15 +27,15 @@ export default function TabLayout() {
           ),
         }}
       />
-      {/* <Tabs.Screen
-        name="excercises"
+      <Tabs.Screen
+        name="exercises"
         options={{
           title: "Excercises",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="dumbbell.fill" color={color} />
+            <FontAwesomeIcon size={24} name="dumbbell" weight="solid" color={color} />
           ),
         }}
-      /> */}
+      />
     </Tabs>
   );
 }

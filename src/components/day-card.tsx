@@ -1,70 +1,25 @@
-import { exerciseImages } from "@/assets/images/exercises/exerciseImages";
-import { IconSymbol } from "@/components/ui/icon-symbol";
-import Day from "@/database/models/Day";
-import Exercise from "@/database/models/Exercise";
-import { excerciseRepository } from "@/database/repositories/exersice";
-import { router } from "expo-router";
-import { useEffect, useState } from "react";
-import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
+import { Day, Exercise } from "@/types/day";
+import { useCallback } from "react";
+import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
+import { ExerciseItem } from "./exercise-item";
 
 type DayCardProps = {
     item: Day;
 }
 
-type ExerciseItemProps = {
-    item: Exercise;
-}
-
-export function ExerciseItem({ item }: ExerciseItemProps) {
-    return (
-        <TouchableOpacity
-            style={styles.exerciseItem}
-            onPress={() => {
-                console.log(item.name);
-            }}
-            activeOpacity={0.7}
-        >
-            <View style={styles.exerciseImageContainer}>
-                <Image
-                    source={exerciseImages[item.gif]}
-                    style={styles.exerciseImage}
-                    resizeMode="cover"
-                />
-            </View>
-            <Text style={styles.exerciseName}>{item.name}</Text>
-        </TouchableOpacity>
-    );
-}
-
 export function DayCard({ item }: DayCardProps) {
-    const [exercises, setExercises] = useState<Exercise[]>([]);
-
-    useEffect(() => {
-        excerciseRepository.getExercisesByDayId(item.id).then((exercises: Exercise[]) => {
-            setExercises(exercises ?? []);
-        });
-    }, [item]);
-
-    const renderExerciseItem = ({ item }: { item: Exercise }) => {
+    const renderExerciseItem = useCallback(({ item }: { item: Exercise }) => {
         return (
             <ExerciseItem item={item} />
         );
-    };
+    }, []);
 
-    const keyExtractor = (item: Exercise) => item.name;
-
-    const handleManagePress = () => {
-        router.push({
-            pathname: '/manage-day/[day]',
-            params: { day: item.day.toString() },
-        });
-    };
+    const keyExtractor = useCallback((item: Exercise) => item.id.toString(), []);
 
     return (
         <TouchableOpacity
             style={styles.container}
-            onPress={handleManagePress}
             activeOpacity={0.95}
         >
             <View style={styles.header}>
@@ -76,18 +31,12 @@ export function DayCard({ item }: DayCardProps) {
                     <Text style={styles.dayName}>{item.dayName}</Text>
                 </View>
                 <View style={styles.exerciseCount}>
-                    <Text style={styles.exerciseCountText}>{exercises?.length ?? 0}</Text>
+                    <Text style={styles.exerciseCountText}>{item.exercises?.length ?? 0}</Text>
                     <Text style={styles.exerciseCountLabel}>exercises</Text>
                 </View>
-                <TouchableOpacity
-                    style={styles.manageButton}
-                    onPress={handleManagePress}
-                >
-                    <IconSymbol name="pencil.circle.fill" size={24} color="#ff1ff4" />
-                </TouchableOpacity>
             </View>
             <FlatList
-                data={exercises}
+                data={item.exercises}
                 renderItem={renderExerciseItem}
                 keyExtractor={keyExtractor}
                 style={styles.exercisesList}
@@ -189,34 +138,5 @@ const styles = StyleSheet.create((theme) => ({
     exerciseSeparator: {
         width: theme.gap(2),
     },
-    exerciseItem: {
-        width: 200,
-        borderRadius: 12,
-        overflow: 'hidden',
-        backgroundColor: theme.colors.background,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
-        elevation: 2,
-    },
-    exerciseImageContainer: {
-        width: '100%',
-        height: 200,
-        backgroundColor: theme.colors.background,
-    },
-    exerciseImage: {
-        width: '100%',
-        height: '100%',
-    },
-    exerciseName: {
-        fontSize: 14,
-        fontWeight: '600',
-        color: theme.colors.text,
-        padding: theme.gap(1.5),
-        paddingTop: theme.gap(1),
-    },
+
 }));

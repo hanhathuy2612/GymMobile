@@ -1,0 +1,177 @@
+[
+    {
+        "id": 1,
+        "name": "Barbell Deadlifts",
+        "gif": "Barbell Deadlifts.gif"
+    },
+    {
+        "id": 2,
+        "name": "One-arm Dumbbell Rows",
+        "gif": "Dumbbell One-Arm Row 2.gif"
+    },
+    {
+        "id": 3,
+        "name": "Barbell Bent Over Rows",
+        "gif": "Barbell Bent Over Rows.gif"
+    },
+    {
+        "id": 4,
+        "name": "Dumbbell Bicep Curls",
+        "gif": "Dumbbell Bicep Curls.gif"
+    },
+    {
+        "id": 5,
+        "name": "Hammer Curls",
+        "gif": "Hammer Curls.gif"
+    },
+    {
+        "id": 6,
+        "name": "Barbell Drag Curls",
+        "gif": "Barbell Drag Curls.gif"
+    },
+    {
+        "id": 7,
+        "name": "Plank Hold (Finisher)",
+        "gif": "Plank Hold.gif"
+    },
+    {
+        "id": 8,
+        "name": "Barbell Bench Press (floor press)",
+        "gif": "Barbell Bench Press.gif"
+    },
+    {
+        "id": 9,
+        "name": "Dumbbell Chest Fly (on floor)",
+        "gif": "Dumbbell Chest Fly.gif"
+    },
+    {
+        "id": 10,
+        "name": "Barbell Close-Grip Press",
+        "gif": "Barbell Close-Grip Press.gif"
+    },
+    {
+        "id": 11,
+        "name": "Dumbbell Pullover",
+        "gif": "Dumbbell Pullover.gif"
+    },
+    {
+        "id": 12,
+        "name": "Weighted Crunches",
+        "gif": "Weighted Crunches.gif"
+    },
+    {
+        "id": 13,
+        "name": "Russian Twists (with dumbbell)",
+        "gif": "Russian Twists.gif"
+    },
+    {
+        "id": 14,
+        "name": "Leg Raises",
+        "gif": "Leg Raises.gif"
+    },
+    {
+        "id": 15,
+        "name": "Barbell Back Squats",
+        "gif": "Barbell Back Squats.gif"
+    },
+    {
+        "id": 16,
+        "name": "Dumbbell Goblet Squats",
+        "gif": "Dumbbell Goblet Squats.gif"
+    },
+    {
+        "id": 17,
+        "name": "Barbell Romanian Deadlifts",
+        "gif": "Barbell Romanian Deadlifts.gif"
+    },
+    {
+        "id": 18,
+        "name": "Dumbbell Lunges",
+        "gif": "Dumbbell Lunges.gif"
+    },
+    {
+        "id": 19,
+        "name": "Dumbbell Calf Raises",
+        "gif": "Dumbbell Calf Raises.gif"
+    },
+    {
+        "id": 20,
+        "name": "Wall Sit (Finisher)",
+        "gif": "Wall Sit.gif"
+    },
+    {
+        "id": 21,
+        "name": "Barbell Bench Press (floor press)",
+        "gif": "Barbell Bench Press.gif"
+    },
+    {
+        "id": 22,
+        "name": "Dumbbell Lateral Raises",
+        "gif": "Dumbbell Lateral Raises.gif"
+    },
+    {
+        "id": 23,
+        "name": "Dumbbell Front Raises",
+        "gif": "Dumbbell Front Raises.gif"
+    },
+    {
+        "id": 24,
+        "name": "Dumbbell Rear Delt Fly",
+        "gif": "Dumbbell Rear Delt Fly.gif"
+    },
+    {
+        "id": 25,
+        "name": "Dumbbell Calf Raises",
+        "gif": "Dumbbell Calf Raises.gif"
+    },
+    {
+        "id": 26,
+        "name": "Barbell Bench Press (floor press)",
+        "gif": "Barbell Bench Press.gif"
+    },
+    {
+        "id": 27,
+        "name": "Dumbbell Shrugs",
+        "gif": "Dumbbell Shrugs.gif"
+    },
+    {
+        "id": 28,
+        "name": "Inverted Rows (under table)",
+        "gif": "Inverted Rows.gif"
+    },
+    {
+        "id": 29,
+        "name": "Dumbbell Concentration Curls",
+        "gif": "Dumbbell Concentration Curls.gif"
+    },
+    {
+        "id": 30,
+        "name": "Hanging Leg Raises (use bar or door)",
+        "gif": "Hanging Leg Raises.gif"
+    },
+    {
+        "id": 31,
+        "name": "Plank with Dumbbell Drag",
+        "gif": "Plank with Dumbbell Drag.gif"
+    },
+    {
+        "id": 32,
+        "name": "Barbell Clean and Press",
+        "gif": "Barbell Clean and Press.gif"
+    },
+    {
+        "id": 33,
+        "name": "Dumbbell Thrusters (Squat + Press)",
+        "gif": "Dumbbell Thrusters.gif"
+    },
+    {
+        "id": 34,
+        "name": "Barbell Deadlift High Pull",
+        "gif": "Barbell Deadlift High Pull.gif"
+    },
+    {
+        "id": 35,
+        "name": "Dumbbell Renegade Rows",
+        "gif": "Dumbbell Renegade Rows.gif"
+    }
+]

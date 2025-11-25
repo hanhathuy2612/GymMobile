@@ -1,42 +1,44 @@
 import { DayCard } from "@/components/day-card";
 import { Screen } from "@/components/Screen";
-import Day from "@/database/models/Day";
 import { useDaysQuery } from "@/hooks/use-days-query";
+import { Day } from "@/types/day";
+import { useCallback } from "react";
 import { ActivityIndicator, FlatList, RefreshControl, Text, View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 
 export function HomeScreen() {
-    const days = useDaysQuery();
+    const { data: days = [], isLoading, refetch } = useDaysQuery();
 
-    const renderItem = ({ item }: { item: Day }) => {
+    const renderItem = useCallback(({ item }: { item: Day }) => {
         return <DayCard item={item} />;
-    };
+    }, []);
 
-    const keyExtractor = (item: Day) => item.id;
-    const renderHeader = () => (
+    const keyExtractor = useCallback((item: Day) => item.day.toString(), []);
+
+    const renderHeader = useCallback(() => (
         <View style={styles.header}>
             <Text style={styles.title}>Workout Plan</Text>
             <Text style={styles.subtitle}>
                 {days ? `${days.length} training days` : "Your fitness journey starts here"}
             </Text>
         </View>
-    );
+    ), [days]);
 
-    const renderEmpty = () => (
+    const renderEmpty = useCallback(() => (
         <View style={styles.emptyContainer}>
             <Text style={styles.emptyText}>No workout data available</Text>
             <Text style={styles.emptySubtext}>Pull down to refresh</Text>
         </View>
-    );
+    ), []);
 
-    const renderLoading = () => (
+    const renderLoading = useCallback(() => (
         <View style={styles.loadingContainer}>
             <ActivityIndicator size="large" color="#ff1ff4" />
             <Text style={styles.loadingText}>Loading workouts...</Text>
         </View>
-    );
+    ), []);
 
-    if (!days) {
+    if (isLoading) {
         return (
             <Screen>
                 {renderHeader()}
@@ -58,7 +60,7 @@ export function HomeScreen() {
                 refreshControl={
                     <RefreshControl
                         refreshing={false}
-                        onRefresh={() => { }}
+                        onRefresh={refetch}
                         tintColor="#ff1ff4"
                         colors={["#ff1ff4"]}
                     />
