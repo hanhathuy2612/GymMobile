@@ -1,10 +1,15 @@
 import { exerciseImages } from "@/assets/images/exercises/exerciseImages";
-import { Exercise, GymData } from "@/types/gym";
+import { IconSymbol } from "@/components/ui/icon-symbol";
+import Day from "@/database/models/Day";
+import Exercise from "@/database/models/Exercise";
+import { excerciseRepository } from "@/database/repositories/exersice";
+import { router } from "expo-router";
+import { useEffect, useState } from "react";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 
 type DayCardProps = {
-    item: GymData;
+    item: Day;
 }
 
 type ExerciseItemProps = {
@@ -13,10 +18,13 @@ type ExerciseItemProps = {
 
 export function ExerciseItem({ item }: ExerciseItemProps) {
     return (
-        <TouchableOpacity style={styles.exerciseItem} onPress={() => {
-            console.log(item.name);
-        }}>
-            <Text style={styles.exerciseName}>{item.name}</Text>
+        <TouchableOpacity
+            style={styles.exerciseItem}
+            onPress={() => {
+                console.log(item.name);
+            }}
+            activeOpacity={0.7}
+        >
             <View style={styles.exerciseImageContainer}>
                 <Image
                     source={exerciseImages[item.gif]}
@@ -24,85 +32,191 @@ export function ExerciseItem({ item }: ExerciseItemProps) {
                     resizeMode="cover"
                 />
             </View>
+            <Text style={styles.exerciseName}>{item.name}</Text>
         </TouchableOpacity>
     );
 }
 
 export function DayCard({ item }: DayCardProps) {
+    const [exercises, setExercises] = useState<Exercise[]>([]);
+
+    useEffect(() => {
+        excerciseRepository.getExercisesByDayId(item.id).then((exercises: Exercise[]) => {
+            setExercises(exercises ?? []);
+        });
+    }, [item]);
+
     const renderExerciseItem = ({ item }: { item: Exercise }) => {
         return (
             <ExerciseItem item={item} />
         );
     };
 
-    const keyExtractor = (item: Exercise) => item.id.toString();
+    const keyExtractor = (item: Exercise) => item.name;
+
+    const handleManagePress = () => {
+        router.push({
+            pathname: '/manage-day/[day]',
+            params: { day: item.day.toString() },
+        });
+    };
 
     return (
-        <View style={styles.container}>
+        <TouchableOpacity
+            style={styles.container}
+            onPress={handleManagePress}
+            activeOpacity={0.95}
+        >
             <View style={styles.header}>
-                <Text style={styles.day}>Day {item.day}</Text>
-                <Text style={styles.dayName}>{item.dayName}</Text>
+                <View style={styles.dayBadge}>
+                    <Text style={styles.dayNumber}>{item.day}</Text>
+                </View>
+                <View style={styles.headerText}>
+                    <Text style={styles.day}>Day {item.day}</Text>
+                    <Text style={styles.dayName}>{item.dayName}</Text>
+                </View>
+                <View style={styles.exerciseCount}>
+                    <Text style={styles.exerciseCountText}>{exercises?.length ?? 0}</Text>
+                    <Text style={styles.exerciseCountLabel}>exercises</Text>
+                </View>
+                <TouchableOpacity
+                    style={styles.manageButton}
+                    onPress={handleManagePress}
+                >
+                    <IconSymbol name="pencil.circle.fill" size={24} color="#ff1ff4" />
+                </TouchableOpacity>
             </View>
             <FlatList
-                data={item.exercises}
+                data={exercises}
                 renderItem={renderExerciseItem}
                 keyExtractor={keyExtractor}
                 style={styles.exercisesList}
+                contentContainerStyle={styles.exercisesListContent}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                ItemSeparatorComponent={() => <View style={styles.exerciseSeparator} />}
             />
-        </View>
+        </TouchableOpacity>
     );
 }
 
 const styles = StyleSheet.create((theme) => ({
     container: {
-        flex: 1,
-        backgroundColor: theme.colors.background,
-        padding: 16,
-        elevation: 1,
-        gap: 16,
+        backgroundColor: theme.colors.cardBackground,
+        borderRadius: 16,
+        padding: theme.gap(2.5),
+        marginVertical: theme.gap(1),
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.1,
+        shadowRadius: 8,
+        elevation: 4,
+        borderWidth: 1,
+        borderColor: theme.colors.cardBorder,
     },
     header: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: theme.gap(2),
+        gap: theme.gap(2),
+    },
+    dayBadge: {
+        width: 48,
+        height: 48,
+        borderRadius: 24,
+        backgroundColor: theme.colors.primary,
+        justifyContent: 'center',
+        alignItems: 'center',
+        shadowColor: theme.colors.primary,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+        elevation: 3,
+    },
+    dayNumber: {
+        fontSize: 20,
+        fontWeight: '800',
+        color: '#fff',
+    },
+    headerText: {
+        flex: 1,
         flexDirection: 'column',
-        alignItems: 'flex-start',
-        gap: 4,
+        gap: 2,
     },
     day: {
-        fontSize: 20,
-        fontWeight: 'bold',
+        fontSize: 18,
+        fontWeight: '700',
         color: theme.colors.text,
-        textShadowColor: theme.colors.textShadow,
-        textShadowOffset: { width: 0, height: 1 },
-        textShadowRadius: 2,
-        textShadowOpacity: 0.5,
+        letterSpacing: -0.3,
     },
     dayName: {
-        fontSize: 16,
-        fontWeight: 'bold',
+        fontSize: 14,
+        fontWeight: '500',
         color: theme.colors.text,
+        opacity: 0.7,
+    },
+    exerciseCount: {
+        alignItems: 'flex-end',
+    },
+    exerciseCountText: {
+        fontSize: 20,
+        fontWeight: '700',
+        color: theme.colors.primary,
+    },
+    exerciseCountLabel: {
+        fontSize: 11,
+        fontWeight: '500',
+        color: theme.colors.text,
+        opacity: 0.5,
+        textTransform: 'uppercase',
+        letterSpacing: 0.5,
+    },
+    manageButton: {
+        padding: theme.gap(0.5),
     },
     exercisesList: {
-        gap: 16,
+        marginHorizontal: -theme.gap(0.5),
+    },
+    exercisesListContent: {
+        paddingHorizontal: theme.gap(0.5),
+    },
+    exerciseSeparator: {
+        width: theme.gap(2),
     },
     exerciseItem: {
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        gap: 8,
-        elevation: 1,
-    },
-    exerciseName: {
-        fontSize: 14,
-        fontWeight: 'bold',
-        color: theme.colors.text,
+        width: 200,
+        borderRadius: 12,
+        overflow: 'hidden',
+        backgroundColor: theme.colors.background,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 2,
     },
     exerciseImageContainer: {
-        width: 240,
-        height: 240,
-        borderRadius: 10,
-        overflow: 'hidden',
-        elevation: 1,
+        width: '100%',
+        height: 200,
+        backgroundColor: theme.colors.background,
     },
     exerciseImage: {
         width: '100%',
         height: '100%',
+    },
+    exerciseName: {
+        fontSize: 14,
+        fontWeight: '600',
+        color: theme.colors.text,
+        padding: theme.gap(1.5),
+        paddingTop: theme.gap(1),
     },
 }));

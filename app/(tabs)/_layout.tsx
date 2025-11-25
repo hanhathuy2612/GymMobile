@@ -26,6 +26,15 @@ export default function TabLayout() {
           ),
         }}
       />
+      {/* <Tabs.Screen
+        name="excercises"
+        options={{
+          title: "Excercises",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="dumbbell.fill" color={color} />
+          ),
+        }}
+      /> */}
     </Tabs>
   );
 }
