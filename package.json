@@ -6,6 +6,7 @@
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
     "generate-keystore": "node ./scripts/generate-keystore.js",
+    "setup-signing": "node ./scripts/setup-signing.js",
     "android": "expo run:android",
     "android:prebuild": "npx expo prebuild --clean -p android && node ./scripts/setup-signing.js",
     "android:build:release": "npm run android:prebuild && cd android && ./gradlew assembleRelease",

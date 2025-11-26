@@ -14,7 +14,7 @@ if (!fs.existsSync(buildGradlePath)) {
 
 let buildGradle = fs.readFileSync(buildGradlePath, 'utf8');
 
-// 1. Thêm release signing config vào signingConfigs block
+// 1. Add the release signing config to the signingConfigs block
 const releaseSigningConfig = `        release {
             def keystorePath = file('../../keystore/gym-release.keystore')
             if (keystorePath.exists()) {
@@ -30,11 +30,11 @@ const releaseSigningConfig = `        release {
             }
         }`;
 
-// Kiểm tra xem đã có release config trong signingConfigs chưa
+// Check if the release signing config already exists
 const hasReleaseSigningConfig = /signingConfigs\s*\{[\s\S]*?release\s*\{/.test(buildGradle);
 
 if (!hasReleaseSigningConfig) {
-    // Thêm release config vào sau debug config
+    // Add the release config after the debug config
     buildGradle = buildGradle.replace(
         /(signingConfigs\s*\{[\s\S]*?debug\s*\{[\s\S]*?\}\s*)(\})/,
         `$1${releaseSigningConfig}\n    $2`
@@ -44,8 +44,8 @@ if (!hasReleaseSigningConfig) {
     console.log('ℹ️  Release signing config already exists');
 }
 
-// 2. Cập nhật buildTypes.release để dùng release signing config
-// Tìm và thay thế signingConfig signingConfigs.debug thành signingConfig signingConfigs.release trong release buildType
+// 2. Update buildTypes.release to use the release signing config
+// Find and replace signingConfig signingConfigs.debug with signingConfig signingConfigs.release in the release buildType
 buildGradle = buildGradle.replace(
     /(buildTypes\s*\{[\s\S]*?release\s*\{[\s\S]*?)signingConfig signingConfigs\.debug/,
     '$1signingConfig signingConfigs.release'
