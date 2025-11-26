@@ -48,7 +48,7 @@ export function HomeScreen() {
     }
 
     return (
-        <Screen>
+        <Screen edges={['top', 'left', 'right']}>
             <FlatList
                 data={days ?? []}
                 renderItem={renderItem}

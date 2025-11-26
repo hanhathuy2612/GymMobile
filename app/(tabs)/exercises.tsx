@@ -54,7 +54,7 @@ export default function ExercisesScreen() {
     }, []);
 
     return (
-        <Screen>
+        <Screen edges={['left', 'right', 'bottom']}>
             <SearchBar
                 onSearch={handleSearch}
                 containerStyle={styles.searchBarContainer}

@@ -22,6 +22,7 @@ const lightTheme = {
         cardBorder: '#000',
         cardBackground: '#fff',
         random: () => generateRandomColor(),
+        cardShadow: '#000',
     },
     gap: (v: number) => v * 8,
     fontSizes
@@ -39,6 +40,7 @@ const darkTheme = {
         cardText: '#fff',
         cardBorder: '#fff',
         cardBackground: '#000',
+        cardShadow: '#fff',
         random: () => generateRandomColor(),
     },
     gap: (v: number) => v * 8,

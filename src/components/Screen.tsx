@@ -1,9 +1,27 @@
-import { SafeAreaView } from "react-native-safe-area-context";
+import { KeyboardAvoidingView, View } from "react-native";
+import { Edge, SafeAreaView } from "react-native-safe-area-context";
+import { StyleSheet } from "react-native-unistyles";
 
-export function Screen({ children }: { children: React.ReactNode }) {
+
+type ScreenProps = {
+    children: React.ReactNode;
+    edges?: Edge[];
+}
+
+export function Screen({ children, edges = ['top', 'left', 'right', 'bottom'] }: ScreenProps) {
     return (
-        <SafeAreaView edges={['top', 'left', 'right', 'bottom']}>
-            {children}
+        <SafeAreaView edges={edges} mode="padding">
+            <KeyboardAvoidingView behavior="padding">
+                <View style={styles.container}>
+                    {children}
+                </View>
+            </KeyboardAvoidingView>
         </SafeAreaView>
     );
 }
+
+const styles = StyleSheet.create((theme, runtime) => ({
+    container: {
+        backgroundColor: theme.colors.background,
+    },
+}));

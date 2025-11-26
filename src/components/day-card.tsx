@@ -134,9 +134,9 @@ const styles = StyleSheet.create((theme) => ({
     },
     exercisesListContent: {
         paddingHorizontal: theme.gap(0.5),
+        paddingVertical: theme.gap(0.5),
     },
     exerciseSeparator: {
         width: theme.gap(2),
     },
-
 }));

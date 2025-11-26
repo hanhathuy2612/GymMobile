@@ -52,17 +52,15 @@ export function ExerciseItem(props: ExerciseItemProps) {
 const styles = StyleSheet.create((theme) => ({
     exerciseItem: (isFullWidth: boolean) => ({
         width: isFullWidth ? '100%' : 200,
+        minWidth: 200,
         borderRadius: 12,
         overflow: 'hidden',
         backgroundColor: theme.colors.background,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
-        elevation: 2,
+        shadowColor: theme.colors.cardShadow,
+        borderColor: theme.colors.cardBorder,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        padding: theme.gap(1),
     }),
     exerciseImageContainer: {
         width: '100%',
