@@ -1,21 +1,34 @@
 import { exerciseImages } from "@/assets/images/exercises/exerciseImages";
 import { Exercise } from "@/types/day";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
-import { StyleSheet } from "react-native-unistyles";
+import { StyleSheet, useUnistyles } from "react-native-unistyles";
 
 type ExerciseItemProps = {
     item: Exercise;
     isFullWidth?: boolean;
+    highlightText?: string;
     onPress?: (item: Exercise) => void;
 }
 
 export function ExerciseItem(props: ExerciseItemProps) {
-    const { item, isFullWidth = false, onPress } = props;
+    const { theme } = useUnistyles();
+    const { item, isFullWidth = false, highlightText = '', onPress } = props;
 
     const handlePress = useCallback(() => {
         onPress?.(item);
     }, [item, onPress]);
+
+    const highlightedText = useMemo(() => {
+        const regex = new RegExp(`(${highlightText})`, 'gi');
+        const parts = item.name.split(regex);
+        return parts.map((part, index) => {
+            if (index % 2 === 0) {
+                return part;
+            }
+            return <Text key={index} style={{ color: theme.colors.primary }}>{part}</Text>;
+        });
+    }, [item.name, highlightText, theme.colors.primary]);
 
     return (
         <TouchableOpacity
@@ -27,10 +40,10 @@ export function ExerciseItem(props: ExerciseItemProps) {
                 <Image
                     source={exerciseImages[item.gif]}
                     style={styles.exerciseImage}
-                    resizeMode="cover"
+                    resizeMode="contain"
                 />
             </View>
-            <Text style={styles.exerciseName}>{item.name}</Text>
+            <Text style={styles.exerciseName}>{highlightedText}</Text>
         </TouchableOpacity>
     );
 }

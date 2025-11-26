@@ -15,7 +15,7 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         headerShown: false,
-        tabBarButton: HapticTab,
+        tabBarButton: HapticTab
       }}
     >
       <Tabs.Screen
@@ -30,7 +30,9 @@ export default function TabLayout() {
       <Tabs.Screen
         name="exercises"
         options={{
-          title: "Excercises",
+          title: "Exercises",
+          headerShown: true,
+          headerTitle: "Exercises",
           tabBarIcon: ({ color }) => (
             <FontAwesomeIcon size={24} name="dumbbell" weight="solid" color={color} />
           ),

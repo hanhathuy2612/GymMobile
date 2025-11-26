@@ -1,4 +1,13 @@
+import { generateRandomColor } from '@/utils/generate-random-color';
 import { StyleSheet } from 'react-native-unistyles';
+
+const fontSizes = {
+    xs: 12,
+    sm: 14,
+    md: 16,
+    lg: 18,
+    xl: 20,
+}
 
 const lightTheme = {
     colors: {
@@ -12,8 +21,10 @@ const lightTheme = {
         cardText: '#000',
         cardBorder: '#000',
         cardBackground: '#fff',
+        random: () => generateRandomColor(),
     },
-    gap: (v: number) => v * 8
+    gap: (v: number) => v * 8,
+    fontSizes
 }
 
 const darkTheme = {
@@ -28,8 +39,10 @@ const darkTheme = {
         cardText: '#fff',
         cardBorder: '#fff',
         cardBackground: '#000',
+        random: () => generateRandomColor(),
     },
-    gap: (v: number) => v * 8
+    gap: (v: number) => v * 8,
+    fontSizes
 }
 
 const appThemes = {
@@ -60,5 +73,5 @@ StyleSheet.configure({
         initialTheme: 'light',
     },
     breakpoints,
-    themes: appThemes
+    themes: appThemes,
 })
