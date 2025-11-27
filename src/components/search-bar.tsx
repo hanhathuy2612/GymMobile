@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { StyleProp, TextInput, TextStyle, View, ViewStyle } from "react-native";
-import { StyleSheet } from "react-native-unistyles";
+import { StyleSheet, useUnistyles } from "react-native-unistyles";
 
 type SearchBarProps = {
     placeholder?: string;
@@ -11,6 +11,7 @@ type SearchBarProps = {
 
 export function SearchBar(props: SearchBarProps) {
     const { placeholder = 'Search', containerStyle, inputStyle, onSearch } = props;
+    const { theme } = useUnistyles();
 
     const handleSearch = useCallback((text: string) => {
         onSearch?.(text);
@@ -22,19 +23,21 @@ export function SearchBar(props: SearchBarProps) {
                 placeholder={placeholder}
                 style={[styles.input, inputStyle]}
                 onChangeText={handleSearch}
+                placeholderTextColor={theme.colors.text}
             />
         </View>
     );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create((theme) => ({
     container: {
         padding: 10,
     },
     input: {
         borderWidth: 1,
-        borderColor: 'gray',
+        borderColor: theme.colors.border,
         borderRadius: 10,
         padding: 10,
+        color: theme.colors.text,
     },
-});
+}));

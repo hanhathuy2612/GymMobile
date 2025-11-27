@@ -1,9 +1,10 @@
 import { ExerciseItem } from "@/components/exercise-item";
-import { Screen } from "@/components/Screen";
+import { Screen } from "@/components/screen";
 import { SearchBar } from "@/components/search-bar";
 import { useExercisesQuery } from "@/hooks/use-exercise-query";
 import { useGroupsQuery } from "@/hooks/use-groups-query";
 import { Exercise, Group } from "@/types/day";
+import { invertColorWithContrast } from "@/utils/invert-color";
 import { useCallback, useMemo, useState } from "react";
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
@@ -37,11 +38,11 @@ export default function ExercisesScreen() {
         const isSelected = selectedGroup === item.name;
         return (
             <TouchableOpacity
-                style={styles.groupItem(item.color, isSelected)}
+                style={styles.groupItem(isSelected)}
                 activeOpacity={0.3}
                 onPress={() => handleGroupPress(item.name)}
             >
-                <Text style={styles.groupItemText(item.color, isSelected)}>{item.name}</Text>
+                <Text style={styles.groupItemText(isSelected)}>{item.name}</Text>
             </TouchableOpacity>
         );
     }, [handleGroupPress, selectedGroup]);
@@ -54,7 +55,7 @@ export default function ExercisesScreen() {
     }, []);
 
     return (
-        <Screen edges={['left', 'right', 'bottom']}>
+        <Screen edges={['left', 'right']}>
             <SearchBar
                 onSearch={handleSearch}
                 containerStyle={styles.searchBarContainer}
@@ -85,30 +86,33 @@ const styles = StyleSheet.create((theme, runtime) => ({
     container: {
         paddingHorizontal: theme.gap(2),
         gap: theme.gap(2),
-        paddingBottom: runtime.insets.bottom + 100,
+        paddingBottom: runtime.insets.bottom,
     },
     searchBarContainer: {
         paddingHorizontal: theme.gap(2),
     },
     groupsList: {
         padding: theme.gap(2),
+        marginBottom: theme.gap(2),
     },
     groupsContainer: {
         gap: theme.gap(1.5),
     },
-    groupItem: (color: string, isSelected: boolean) => ({
+    groupItem: (isSelected: boolean) => ({
         paddingVertical: theme.gap(1),
         paddingHorizontal: theme.gap(1.5),
         borderRadius: 999,
+        borderColor: theme.colors.border,
+        borderWidth: 1,
         alignItems: 'center',
         justifyContent: 'center',
         height: 40,
-        backgroundColor: isSelected ? color : theme.colors.background,
+        backgroundColor: isSelected ? invertColorWithContrast(theme.colors.background) : theme.colors.background,
     }),
-    groupItemText: (color: string, isSelected: boolean) => ({
+    groupItemText: (isSelected: boolean) => ({
         fontSize: theme.fontSizes.md,
         fontWeight: '600',
-        color: isSelected ? theme.colors.background : color,
+        color: isSelected ? invertColorWithContrast(theme.colors.text) : theme.colors.text,
     }),
     itemSeparator: {
         height: theme.gap(2),

@@ -1,5 +1,5 @@
 import { DayCard } from "@/components/day-card";
-import { Screen } from "@/components/Screen";
+import { Screen } from "@/components/screen";
 import { useDaysQuery } from "@/hooks/use-days-query";
 import { Day } from "@/types/day";
 import { useCallback } from "react";
@@ -48,7 +48,7 @@ export function HomeScreen() {
     }
 
     return (
-        <Screen edges={['top', 'left', 'right']}>
+        <Screen edges={['top', 'left', 'right',]}>
             <FlatList
                 data={days ?? []}
                 renderItem={renderItem}

@@ -72,7 +72,7 @@ declare module 'react-native-unistyles' {
 
 StyleSheet.configure({
     settings: {
-        initialTheme: 'light',
+        initialTheme: 'dark',
     },
     breakpoints,
     themes: appThemes,
