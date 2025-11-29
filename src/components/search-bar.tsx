@@ -31,7 +31,7 @@ export function SearchBar(props: SearchBarProps) {
 
 const styles = StyleSheet.create((theme) => ({
     container: {
-        padding: 10,
+        flexGrow: 1,
     },
     input: {
         borderWidth: 1,

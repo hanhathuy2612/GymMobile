@@ -1,3 +1,4 @@
+import { AddOrUpdateExercise } from "@/components/add-or-update-exercise";
 import { ExerciseItem } from "@/components/exercise-item";
 import { Screen } from "@/components/screen";
 import { SearchBar } from "@/components/search-bar";
@@ -6,12 +7,13 @@ import { useGroupsQuery } from "@/hooks/use-groups-query";
 import { Exercise, Group } from "@/types/day";
 import { invertColorWithContrast } from "@/utils/invert-color";
 import { useCallback, useMemo, useState } from "react";
-import { FlatList, Text, TouchableOpacity, View } from "react-native";
+import { Button, FlatList, Text, TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 
 export default function ExercisesScreen() {
     const [selectedGroup, setSelectedGroup] = useState<string | null>(null);
     const [search, setSearch] = useState('');
+    const [isAddExerciseOpen, setIsAddExerciseOpen] = useState(false);
 
     const { data: exercises = [] } = useExercisesQuery();
     const { data: groups = [] } = useGroupsQuery();
@@ -54,12 +56,22 @@ export default function ExercisesScreen() {
         setSearch(search);
     }, []);
 
+    const handleAddExercisePress = useCallback(() => {
+        setIsAddExerciseOpen(true);
+    }, []);
+
     return (
         <Screen edges={['left', 'right']}>
-            <SearchBar
-                onSearch={handleSearch}
-                containerStyle={styles.searchBarContainer}
-            />
+            <View style={styles.header}>
+                <SearchBar
+                    onSearch={handleSearch}
+                    containerStyle={styles.searchBarContainer}
+                />
+                <Button
+                    title="Add Exercise"
+                    onPress={handleAddExercisePress}
+                />
+            </View>
 
             <FlatList
                 data={groups}
@@ -78,6 +90,7 @@ export default function ExercisesScreen() {
                 contentContainerStyle={styles.container}
                 ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
             />
+            <AddOrUpdateExercise isOpen={isAddExerciseOpen} onClose={() => setIsAddExerciseOpen(false)} />
         </Screen>
     );
 }
@@ -89,7 +102,14 @@ const styles = StyleSheet.create((theme, runtime) => ({
         paddingBottom: runtime.insets.bottom,
     },
     searchBarContainer: {
+        // paddingHorizontal: theme.gap(2),
+    },
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         paddingHorizontal: theme.gap(2),
+        gap: theme.gap(2),
     },
     groupsList: {
         padding: theme.gap(2),
