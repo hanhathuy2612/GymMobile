@@ -1,7 +1,8 @@
 import { Controller, useForm } from "react-hook-form";
-import { Text, TextInput, View } from "react-native";
+import { TextInput, View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 import { AppButton } from "./ui/app-button";
+import { FormField } from "./ui/form-field";
 
 
 export type ExerciseFormValues = {
@@ -32,38 +33,27 @@ export function ExerciseForm(props: ExerciseFormProps) {
     const onSubmit = (data: ExerciseFormValues) => props.onSubmit(data)
 
     return (
-        <View>
-            <Controller
+        <View style={styles.formContainer}>
+            <FormField
                 control={control}
+                errors={errors}
+                name="name"
+                label="Name"
+                placeholder="Name"
                 rules={{
                     required: true,
                 }}
-                render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                        placeholder="Name"
-                        onBlur={onBlur}
-                        onChangeText={onChange}
-                        value={value}
-                    />
-                )}
-                name="name"
             />
-            {errors.name && <Text>This is required.</Text>}
 
-            <Controller
+            <FormField
                 control={control}
+                errors={errors}
+                name="group"
+                label="Group"
+                placeholder="Group"
                 rules={{
                     maxLength: 100,
                 }}
-                render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                        placeholder="group"
-                        onBlur={onBlur}
-                        onChangeText={onChange}
-                        value={value}
-                    />
-                )}
-                name="group"
             />
 
 
@@ -91,6 +81,7 @@ export function ExerciseForm(props: ExerciseFormProps) {
 const styles = StyleSheet.create((theme) => ({
     formContainer: {
         gap: theme.gap(2),
+        padding: theme.gap(2),
     },
     formLabel: {
         fontSize: theme.fontSizes.md,
