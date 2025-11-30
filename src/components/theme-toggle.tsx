@@ -1,17 +1,21 @@
+import { useThemeStore } from '@/hooks/use-theme-store';
 import { useCallback, useState } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import { StyleSheet, UnistylesRuntime } from 'react-native-unistyles';
 
 
 export function ThemeToggle() {
-    const [isDark, setIsDark] = useState(UnistylesRuntime.themeName === 'dark');
+    const { getTheme, setTheme } = useThemeStore();
+    const currentTheme = getTheme();
+    const [isDark, setIsDark] = useState(currentTheme === 'dark');
 
     const toggleTheme = useCallback(() => {
-        const isDark = UnistylesRuntime.themeName === 'dark';
+        const isDark = currentTheme === 'dark';
         const newTheme = isDark ? 'light' : 'dark';
         UnistylesRuntime.setTheme(newTheme);
+        setTheme(newTheme);
         setIsDark(!isDark);
-    }, []);
+    }, [currentTheme, setTheme]);
 
     return (
         <TouchableOpacity

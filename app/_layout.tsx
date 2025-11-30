@@ -3,7 +3,8 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { useInitialTheme } from '@/hooks/use-initial-theme';
+import { useThemeStore } from '@/hooks/use-theme-store';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -13,7 +14,11 @@ export const unstable_settings = {
 };
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+  // initialize the theme
+  useInitialTheme();
+
+  const { getTheme } = useThemeStore();
+
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -22,7 +27,7 @@ export default function RootLayout() {
     },
   });
 
-  const theme = colorScheme === 'dark' ? DarkTheme : DefaultTheme;
+  const theme = getTheme() === 'dark' ? DarkTheme : DefaultTheme;
 
   return (
     <QueryClientProvider client={queryClient}>

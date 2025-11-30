@@ -1,48 +1,33 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
-import { useNavigation } from '@react-navigation/native';
-import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { Text, TouchableOpacity, View } from "react-native";
 import { StyleSheet } from 'react-native-unistyles';
+import { ExerciseForm, ExerciseFormValues } from './exercise-form';
 
 type AddOrUpdateExerciseProps = {
     isOpen: boolean;
+    title: string;
     onClose?: () => void;
 }
 
-const snapPoints = ['100%'];
+const SNAP_POINTS = ['100%'];
 
 export function AddOrUpdateExercise(props: AddOrUpdateExerciseProps) {
-    const { isOpen, onClose } = props;
-    const navigation = useNavigation();
-    // ref
+    const { isOpen, title, onClose } = props;
+
     const bottomSheetRef = useRef<BottomSheet>(null);
 
     useEffect(() => {
-        console.log('isOpen', isOpen);
         if (isOpen) {
-            console.log('set options');
-            navigation.setOptions({
-                title: 'Add Exercise'
-            });
             bottomSheetRef.current?.expand();
         } else {
-            navigation.setOptions({
-                title: 'Add Exercise',
-            });
             bottomSheetRef.current?.close();
         }
-    }, [isOpen, navigation]);
+    }, [isOpen]);
 
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            title: 'Add Exercise',
-        });
-    }, [isOpen, navigation]);
-
-    // callbacks
     const handleSheetChanges = useCallback((index: number) => {
-        console.log('handleSheetChanges', index);
+        console.log('[handleSheetChanges]', index);
     }, []);
 
     const handleClosePress = useCallback(() => {
@@ -50,10 +35,14 @@ export function AddOrUpdateExercise(props: AddOrUpdateExerciseProps) {
         onClose?.();
     }, [bottomSheetRef, onClose]);
 
+    const handleSubmit = useCallback((values: ExerciseFormValues) => {
+        console.log('[handleSubmit]', values);
+    }, []);
+
     return (
         <BottomSheet
             index={-1}
-            snapPoints={snapPoints}
+            snapPoints={SNAP_POINTS}
             ref={bottomSheetRef}
             onChange={handleSheetChanges}
             enableDynamicSizing={true}
@@ -63,11 +52,12 @@ export function AddOrUpdateExercise(props: AddOrUpdateExerciseProps) {
         >
             <BottomSheetView style={styles.contentContainer}>
                 <View style={styles.headerContainer}>
-                    <Text style={styles.headerTitle}>Add Exercise</Text>
+                    <Text style={styles.headerTitle}>{title}</Text>
                     <TouchableOpacity onPress={handleClosePress}>
                         <FontAwesome name="close" size={24} color="black" style={{ fontWeight: 300 }} />
                     </TouchableOpacity>
                 </View>
+                <ExerciseForm onSubmit={handleSubmit} />
             </BottomSheetView>
         </BottomSheet>
     );
@@ -99,5 +89,9 @@ const styles = StyleSheet.create((theme) => ({
     },
     handleContainer: {
         display: 'none',
+    },
+    formContainer: {
+        flex: 1,
+        padding: theme.gap(2),
     },
 }));

@@ -66,7 +66,6 @@ export default function ExercisesScreen() {
             <View style={styles.header}>
                 <SearchBar
                     onSearch={handleSearch}
-                    containerStyle={styles.searchBarContainer}
                 />
                 <AppButton
                     title="Add Exercise"
@@ -91,7 +90,12 @@ export default function ExercisesScreen() {
                 contentContainerStyle={styles.container}
                 ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
             />
-            <AddOrUpdateExercise isOpen={isAddExerciseOpen} onClose={() => setIsAddExerciseOpen(false)} />
+
+            <AddOrUpdateExercise
+                isOpen={isAddExerciseOpen}
+                title="Add Exercise"
+                onClose={() => setIsAddExerciseOpen(false)}
+            />
         </Screen>
     );
 }
@@ -102,15 +106,13 @@ const styles = StyleSheet.create((theme, runtime) => ({
         gap: theme.gap(2),
         paddingBottom: runtime.insets.bottom,
     },
-    searchBarContainer: {
-        // paddingHorizontal: theme.gap(2),
-    },
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingHorizontal: theme.gap(2),
         gap: theme.gap(2),
+        marginTop: theme.gap(2),
     },
     groupsList: {
         padding: theme.gap(2),
