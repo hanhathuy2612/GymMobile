@@ -2,12 +2,13 @@ import { AddOrUpdateExercise } from "@/components/add-or-update-exercise";
 import { ExerciseItem } from "@/components/exercise-item";
 import { Screen } from "@/components/screen";
 import { SearchBar } from "@/components/search-bar";
+import { AppButton } from "@/components/ui/app-button";
 import { useExercisesQuery } from "@/hooks/use-exercise-query";
 import { useGroupsQuery } from "@/hooks/use-groups-query";
 import { Exercise, Group } from "@/types/day";
 import { invertColorWithContrast } from "@/utils/invert-color";
 import { useCallback, useMemo, useState } from "react";
-import { Button, FlatList, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
 
 export default function ExercisesScreen() {
@@ -67,7 +68,7 @@ export default function ExercisesScreen() {
                     onSearch={handleSearch}
                     containerStyle={styles.searchBarContainer}
                 />
-                <Button
+                <AppButton
                     title="Add Exercise"
                     onPress={handleAddExercisePress}
                 />

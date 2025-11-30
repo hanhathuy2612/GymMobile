@@ -25,6 +25,12 @@ const lightTheme = {
         cardShadow: '#000',
     },
     gap: (v: number) => v * 8,
+    borderRadius: {
+        sm: 4,
+        md: 8,
+        lg: 16,
+        xl: 32,
+    },
     fontSizes
 }
 
@@ -44,6 +50,12 @@ const darkTheme = {
         random: () => generateRandomColor(),
     },
     gap: (v: number) => v * 8,
+    borderRadius: {
+        sm: 4,
+        md: 8,
+        lg: 16,
+        xl: 32,
+    },
     fontSizes
 }
 
